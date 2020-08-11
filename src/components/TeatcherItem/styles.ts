@@ -91,7 +91,10 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontFamily: 'Archivo_700Bold',
     fontSize: 14,
-    marginLeft: 16,
+    marginLeft: 9,
+  },
+  favorited: {
+    backgroundColor: '#e33d3d',
   },
 })
 
