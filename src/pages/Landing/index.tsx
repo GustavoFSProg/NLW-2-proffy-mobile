@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Text, Image, ScrollView } from 'react-native'
 import styles from './styles'
 import LandingImage from '../../assets/images/landing.png'
 import ImageStudy from '../../assets/images/icons/study.png'
@@ -13,6 +13,10 @@ function Landing() {
 
   function handleNavigateToGiveClassestoPage() {
     navigate('Giveclasses')
+  }
+
+  function handleNavigateToStudyPages() {
+    navigate('Study')
   }
 
   return (
@@ -31,7 +35,10 @@ function Landing() {
         <Text style={styles.titleBold}>O que deseja fazer? {'\n'}</Text>
 
         <View style={styles.buttonsContainer}>
-          <RectButton style={[styles.buttons, styles.buttonPrimary]}>
+          <RectButton
+            onPress={handleNavigateToStudyPages}
+            style={[styles.buttons, styles.buttonPrimary]}
+          >
             <Image source={ImageStudy} />
             <Text style={styles.buttonText}>Estudar</Text>
           </RectButton>
