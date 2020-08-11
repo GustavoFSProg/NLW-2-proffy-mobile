@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, Image, ScrollView } from 'react-native'
 import styles from './styles'
 import LandingImage from '../../assets/images/landing.png'
@@ -7,6 +7,7 @@ import giveClasses from '../../assets/images/icons/give-classes.png'
 import { RectButton } from 'react-native-gesture-handler'
 import heartIcon from '../../assets/images/icons/heart.png'
 import { useNavigation } from '@react-navigation/native'
+import api from '../../services/api'
 
 function Landing() {
   const { navigate } = useNavigation()
@@ -19,6 +20,15 @@ function Landing() {
     navigate('Study')
   }
 
+  const [totalConnections, setTotalConnections] = useState(0)
+
+  useEffect(() => {
+    api.get('/connections').then((response) => {
+      const { total } = response.data
+
+      setTotalConnections(total)
+    })
+  }, [])
   return (
     <ScrollView>
       <View
@@ -53,7 +63,7 @@ function Landing() {
         </View>
 
         <Text style={styles.totalConnections}>
-          Total de 900000 conexões ja efetuadas {'  '}
+          Total de {totalConnections} conexões ja efetuadas {'  '}
           <Image source={heartIcon} />
         </Text>
       </View>
