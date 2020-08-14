@@ -6,6 +6,7 @@ import heartIcon from '../../assets/images/icons/heart-outline.png'
 import unfavoriteIcon from '../../assets/images/icons/unfavorite.png'
 import WhatsappIcon from '../../assets/images/icons/whatsapp.png'
 import AsyncStorage from '@react-native-community/async-storage'
+import api from '../../services/api'
 
 export interface Teatcher {
   id: number
@@ -25,6 +26,10 @@ interface TeatcherItemProps {
 const TeatcherItem: React.FC<TeatcherItemProps> = ({ teatcher, favorited }) => {
   function handleLinkToWhatsapp() {
     Linking.openURL(`whatsapp://send?phone=${teatcher.whatsapp}`)
+
+    api.post('connections', {
+      user_id: teatcher.id,
+    })
   }
 
   const [isFavorited, setIsFavorites] = useState(favorited)

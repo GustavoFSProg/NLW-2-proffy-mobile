@@ -13,6 +13,7 @@ import {
 import { Feather } from '@expo/vector-icons'
 import api from '../../services/api'
 import AsyncStorage from '@react-native-community/async-storage'
+import { useFocusEffect } from '@react-navigation/native'
 
 function TeatchersList() {
   const [isFiltersVisible, setFiltersVisible] = useState(false)
@@ -58,6 +59,20 @@ function TeatchersList() {
 
     console.log(response.data)
   }
+
+  function loadFavorites() {
+    AsyncStorage.getItem('favorites').then((response) => {
+      if (response) {
+        const favoritedTeatchers = JSON.parse(response)
+
+        setFavorites(favoritedTeatchers)
+      }
+    })
+  }
+
+  useFocusEffect(() => {
+    loadFavorites()
+  })
 
   return (
     <View style={styles.container}>
