@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text } from 'react-native'
+import {
+  View,
+  Text,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native'
 import styles from './styles'
 import PageHeader from '../../components/PageHeader'
 import TeatcherItem, { Teatcher } from '../../components/TeatcherItem'
@@ -75,76 +82,82 @@ function TeatchersList() {
   })
 
   return (
-    <View style={styles.container}>
-      <PageHeader
-        title="Proffys Disponíveis"
-        headerRight={
-          <BorderlessButton onPress={handleTogglerFiltersVisible}>
-            <Feather name="filter" size={20} color="#fff" />
-          </BorderlessButton>
-        }
-      >
-        {isFiltersVisible && (
-          <View style={styles.searchForm}>
-            <Text style={styles.label}>Máteria:</Text>
-            <TextInput
-              placeholderTextColor="#c1bccc"
-              style={styles.input}
-              placeholder="Qual a Matéria? "
-              value={subject}
-              onChangeText={(text) => setSubject(text)}
-            ></TextInput>
-
-            <View style={styles.inputGroup}>
-              <View style={styles.inputBlock}>
-                <Text style={styles.label}>Dia Da semana:</Text>
+    <ScrollView>
+      <KeyboardAvoidingView behavior="padding" style={styles.container}>
+        {/* <TouchableWithoutFeedback onPress={Keyboard.dismiss}> */}
+        <View style={styles.container}>
+          <PageHeader
+            title="Proffys Disponíveis"
+            headerRight={
+              <BorderlessButton onPress={handleTogglerFiltersVisible}>
+                <Feather name="filter" size={20} color="#fff" />
+              </BorderlessButton>
+            }
+          >
+            {isFiltersVisible && (
+              <View style={styles.searchForm}>
+                <Text style={styles.label}>Máteria:</Text>
                 <TextInput
                   placeholderTextColor="#c1bccc"
                   style={styles.input}
-                  placeholder="Dia da Semana? "
-                  value={week_day}
-                  onChangeText={(text) => setWeek_day(text)}
+                  placeholder="Qual a Matéria? "
+                  value={subject}
+                  onChangeText={(text) => setSubject(text)}
                 ></TextInput>
-              </View>
 
-              <View style={styles.inputBlock}>
-                <Text style={styles.label}>Horário: </Text>
-                <TextInput
-                  placeholderTextColor="#c1bccc"
-                  style={styles.input}
-                  value={time}
-                  onChangeText={(text) => setTime(text)}
-                  placeholder="Horário "
-                ></TextInput>
-              </View>
-            </View>
+                <View style={styles.inputGroup}>
+                  <View style={styles.inputBlock}>
+                    <Text style={styles.label}>Dia Da semana:</Text>
+                    <TextInput
+                      placeholderTextColor="#c1bccc"
+                      style={styles.input}
+                      placeholder="Dia da Semana? "
+                      value={week_day}
+                      onChangeText={(text) => setWeek_day(text)}
+                    ></TextInput>
+                  </View>
 
-            <RectButton
-              onPress={handleFilterSubmit}
-              style={styles.submitButton}
-            >
-              <Text style={styles.submitButtonText}>Filtrar</Text>
-            </RectButton>
-          </View>
-        )}
-      </PageHeader>
-      <ScrollView
-        style={styles.teatcherList}
-        contentContainerStyle={{
-          paddingBottom: 24,
-        }}
-      >
-        {teactchers.map((teatcher: Teatcher) => {
-          return (
-            <TeatcherItem
-              favorited={favorites.includes(teatcher.id)}
-              key={teatcher.id}
-              teatcher={teatcher}
-            />
-          )
-        })}
-      </ScrollView>
-    </View>
+                  <View style={styles.inputBlock}>
+                    <Text style={styles.label}>Horário: </Text>
+                    <TextInput
+                      placeholderTextColor="#c1bccc"
+                      style={styles.input}
+                      value={time}
+                      onChangeText={(text) => setTime(text)}
+                      placeholder="Horário "
+                    ></TextInput>
+                  </View>
+                </View>
+
+                <RectButton
+                  onPress={handleFilterSubmit}
+                  style={styles.submitButton}
+                >
+                  <Text style={styles.submitButtonText}>Filtrar</Text>
+                </RectButton>
+              </View>
+            )}
+          </PageHeader>
+          <ScrollView
+            style={styles.teatcherList}
+            contentContainerStyle={{
+              paddingBottom: 24,
+            }}
+          >
+            {teactchers.map((teatcher: Teatcher) => {
+              return (
+                <TeatcherItem
+                  favorited={favorites.includes(teatcher.id)}
+                  key={teatcher.id}
+                  teatcher={teatcher}
+                />
+              )
+            })}
+          </ScrollView>
+        </View>
+        {/* </TouchableWithoutFeedback> */}
+      </KeyboardAvoidingView>
+    </ScrollView>
   )
 }
 

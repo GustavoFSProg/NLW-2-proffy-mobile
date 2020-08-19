@@ -2,26 +2,25 @@
   "expo": {
     "name": "Proffy",
     "slug": "mobile",
+    "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "../../src/assets/icon.png",
+    "icon": "src/assets/icon.png",
     "splash": {
-      "image": "../src/assets/splash.png",
+      "image": "src/assets/splash.png",
+
       "resizeMode": "contain",
       "backgroundColor": "#7d40E7"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
+    "android": {
+      "package": "com.company.proffyApp"
+    },
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "android": {
-      "package": "com.company.proffyApp"
     }
   }
 }

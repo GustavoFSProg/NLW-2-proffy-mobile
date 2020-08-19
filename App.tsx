@@ -25,8 +25,9 @@ export default function App() {
   } else {
     return (
       <>
-        <StatusBar style="auto" />
-        <Routes />
+       
+          <StatusBar style="auto" />
+          <Routes />
       </>
     )
   }
